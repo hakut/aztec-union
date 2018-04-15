@@ -57,7 +57,7 @@ int main(void)
 __interrupt void Timer_A (void)
     {
         counter++;//we count to obtain 1s in timer
-        if((k%20)==0)
+        if((counter%20)==0)
         {
 
             sec++;//every second we arrange sec, min and hour parameters
@@ -111,6 +111,6 @@ __interrupt void Timer_A (void)
 __interrupt void Port_1 (void) // When we press reset button
 {
     _delay_cycles(500000);//delay to avoid unbalanced operation
-    P1OUT |= resetpin;//we set reset pin so clear pin on register gets 0. And clears bct.
+    P1OUT &= ~resetpin;//we set reset pin so clear pin on register gets 0. And clears bct.
     P1IFG &= ~BIT3; // P1.3 IFG Cleared
 }
